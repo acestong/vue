@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+</style>
+</head>
+<body>
+	
+	<div id="app">
+		<!-- 三：使用组件时，必须将驼峰规则替换成-，且必须是双标记-->
+		<my-component></my-component>
+		<my-component></my-component>
+	</div>
+	<script>
+
+		//一：创建组件的方式二：直接将模版json注册到Vue中
+		//注意：在创建模版的时候，模版中只能有一个跟标签元素，否则会报错，如果非要写多个标签，则在最外层天添加一个div包起来
+		Vue.component("myComponent",{
+			template:"<h3>飞雪连天射白鹿</h3>"
+		});
+		var vue = new Vue({
+			el:"#app",
+			data: {
+			},
+			methods: {
+			}
+		});
+	</script>	
+</body>
+</html>

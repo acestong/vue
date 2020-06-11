@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" rel="stylesheet">
+<style>
+	.v-enter,.v-leave-to{
+		opacity: 0;
+		transform: translateX(150px);
+	}
+	.v-enter-to,.v-leave{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+	.v-enter-active,.v-leave-active{
+		transition: all .6s ease;
+	}
+</style>
+</head>
+<body>
+
+<!--
+-->
+	<div id="app">
+		<ul>
+			<transition-group>
+			<li v-for="item in list" :key="item.id">
+				{{item.id}}---{{item.name}}---{{item.content}}
+			</li>
+			</transition-group>
+		</ul>
+
+		<comment-div v-bind:parentlist="list"></comment-div>
+	</div>
+
+
+	<template id="commentDiv">
+		<div>
+			姓名：<input type="text" v-model="name"/>
+			评论：<input type="text" v-model="content"/>
+			<button type="button" @click="pub">发表评论</button>
+			<br />
+			<br />
+			需删除的id <input type="text" v-model="del_id">
+			<button type="button" @click="del">删除</button>
+		</div>
+
+	</template>
+
+	<script>
+		var vue = new Vue({
+			el:"#app",
+			data:{
+				list:[
+					{id:1,name:"张姗姗",content:"aaa"},
+					{id:2,name:"李思思",content:"bbb"},
+					{id:3,name:"王薇薇",content:"ccc"}
+				]
+			},
+			created(){
+				var commentStr = localStorage.getItem("commentStr")	;
+				// this.list = JSON.parse(commentStr);
+				// if(this.list == null){
+				// 	this.list = [];
+				// }
+				this.list = JSON.parse(commentStr) || [];
+				console.log("created..."+this.list)
+			},
+			components:{
+				"commentDiv":{
+					template:"#commentDiv",
+					props:['parentlist'],
+					data(){
+						return {
+							del_id:"",
+							name:"",
+							content:""
+						}
+					},
+					methods:{
+						pub(){
+							var json = {"id":this.parentlist.length+1,"name":this.name,"content":this.content}
+							this.parentlist.push(json);
+							this.name = this.content = "";
+							var commentStr =JSON.stringify(this.parentlist);
+							localStorage.setItem("commentStr",commentStr);
+						},
+						del(){
+							for(var i = 0 ; i< this.parentlist.length; i++){
+								if( this.parentlist[i].id == this.del_id){
+									this.parentlist.splice(i,1);
+									break;
+								}
+							}
+							var commentStr =JSON.stringify(this.parentlist);
+							localStorage.setItem("commentStr",commentStr);
+						}
+					}
+				}
+			},
+			methods:{
+
+			}
+		})
+	</script>
+
+<!--
+ -->
+</body>
+</html>

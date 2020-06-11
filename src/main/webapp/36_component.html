@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+
+<!--	一般情况下，子组件也不能够直接访问父组件的methods-->
+<!--
+    默认情况下，子组件是无法直接访问父组件的方法的，如下，
+    以下的代码会引起浏览器的报错：Property or method "f1" is not defined on the instance but referenced during render
+-->
+	<div id="app">
+		<!-- 1. 在子组件对应的元素上，绑定一个自定义事件，这里的自定义事件的名字是“func” -->
+		<my-component @func="f1"></my-component>
+	</div>
+	
+	<template id="foo">
+		<div>
+			<!-- 2. 在子组件的模板中，就不在直接访问父组件的"f1"方法了，而是直接访问子组件自己的"abc"方法 -->
+			<button @click="">点点f1</button>
+			<button @click="f2">点点f2</button>
+		</div>
+	</template>
+
+	<script>
+		
+		var app = new Vue({
+			el:"#app",
+			data:{
+				msg:"andy"
+			},
+			methods:{
+				f1(){
+					console.log("fu f1()..")
+				}
+			},
+			components: {
+				"myComponent": {
+					template: "#foo",
+					methods:{
+						/*
+								3. 在子组件自己的方法中“触发”在子组件元素上自定义的事件，
+								恰恰是触发了自定义事件，才引起了父组件的方法的调用！
+
+								如此，子组件就间接地访问到了父组件的方法
+							*/
+						f2(){
+							console.log("zi f2()... ")
+							this.$emit("func")
+						}
+					}
+				}
+			}
+		});
+		
+	</script>
+
+<!--
+ -->
+</body>
+</html>

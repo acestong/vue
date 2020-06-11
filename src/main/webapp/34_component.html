@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+</head>
+<body>
+
+<!--	vue父子组件中的data和methods不能直接相互访问-->
+	<div id="app">
+		{{msg}}
+		<my-component></my-component>
+	</div>
+	
+	<template id="foo">
+		<div>
+			{{counter}}
+			<button @click="f2">F2</button>
+		</div>
+	</template>
+
+	<script>
+		
+		var app = new Vue({
+			el:"#app",
+			data:{
+				msg:"andy"
+			},
+			methods:{
+				f1(){
+					console.log("fu f1...")
+				}
+			},
+			components: {
+				"myComponent": {
+					template: "#foo",
+					data: function() {
+						return {
+							counter: 0
+						}
+					},
+					methods: {
+						f2(){
+							console.log("zi f2...")
+						}
+					}
+				}
+			}
+		});
+		
+	</script>
+
+</body>
+</html>

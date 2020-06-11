@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+<style>
+	.v-enter,.v-leave-to{
+		opacity:0;
+		transform:translateX(150px);
+	}
+	.v-enter-to,.v-leave{
+		opcacity:1;
+		transform: translateX(0px);
+	}
+	.v-enter-active,.v-leave-active{
+		transition: all 1s ease;
+	}
+	<!-- 以下两种样式的搭配才能完成向上移动的动画效果-->
+	.v-move{
+		transition:all .6s ease;
+	}
+	.v-leave-active{
+		position:absolute;
+	}
+</style>
+</head>
+<body>
+	
+	<div id="app">
+		id:<input type="text" v-model="id"/>
+		name:<input type="text" v-model="name" /><br>
+		<button @click="add">add</button>
+		<ul>
+			<!-- 为v-for使用动画，则必须使用transition-group这个标签，使用transition-group时，其中的元素必须制定：key属性 -->
+			<transition-group>
+				<li v-for="(item,i) in list" :key="item.id" @click="del(i)">
+					{{i}}----{{item.id}} --- {{item.name }}
+				</li>
+			</transition-group>
+		</ul>
+	</div>
+	<script>
+		var vue = new Vue({
+			el:"#app",
+			data: {
+				id:'',
+				name:'',
+				list:[
+					{id:1,name:"李小龙"},
+					{id:2,name:"叶问"},
+					{id:3,name:"霍元甲"}
+				]
+			},
+			methods: {
+				add(){
+					var json = {id:this.id,name:this.name};
+					console.log("add..."+json);
+					this.list.push(json);
+					this.id=this.name='';
+				},
+				del(i){
+					this.list.splice(i,1);
+				}
+			}
+		});
+	</script>	
+</body>
+</html>

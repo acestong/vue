@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+</style>
+</head>
+<body>
+	
+	<div id="app">
+		<!-- 三：使用组件时，必须将驼峰规则替换成-，且必须是双标记-->
+		<my-component></my-component>
+	</div>
+
+	<!--
+		1.必须使用vue定义的template元素定义模版
+		2.注意，<template></template>并不是元素的跟标签，本例中，<div></div>才是跟标签
+		-->
+	<template id="foo">
+		<div>hello world !!!</div>
+	</template>
+	<script>
+		//一：创建组件的方式三：
+		Vue.component("myComponent",{
+			template:"#foo"
+		});
+		var vue = new Vue({
+			el:"#app",
+			data: {
+			},
+			methods: {
+			}
+		});
+	</script>	
+</body>
+</html>

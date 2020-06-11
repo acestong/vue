@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+</style>
+</head>
+<body>
+	
+	<div id="app">
+		<!-- 定义私有组件-->
+		1.<my-component></my-component>
+	</div>
+
+
+
+	<template id="foo">
+		<div>hello Vue world!!!</div>
+	</template>
+	<script>
+
+
+		var vue = new Vue({
+			el:"#app",
+			data: {
+			},
+			methods: {
+			},
+			components:{
+				"myComponent":{
+					template:"#foo"
+				}
+			}
+		});
+	</script>
+</body>
+</html>

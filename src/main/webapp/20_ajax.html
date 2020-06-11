@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
+<body>
+<style>
+</style>
+<!--
+    一旦引入了vue-resource,则在每一个vue-resource中都会多出了一个$http属性，就是使用该属性发ajax
+-->
+
+    <div id="app" >
+        <button @click="findAll">findAll</button>
+        <button @click="save">save</button>
+    </div>
+
+<script>
+
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            msg:"冰雨"
+        },
+       methods:{
+            findAll(){
+                this.$http.get("http://localhost:8095/user").then(function(data){
+                    alert(data.body)
+                });
+            },
+            save(){
+                this.$http.post("http://localhost:8095/user",{
+                    "id":10,
+                    "name":"andy",
+                    "birthday":new Date(),
+                    "money":2000
+                });
+            }
+       },
+   })
+</script>
+</body>
+</html>

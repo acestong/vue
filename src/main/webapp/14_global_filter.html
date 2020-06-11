@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+-->
+
+    <div id="app" >
+        {{date| foo}}
+    </div>
+
+<script>
+    //定义一个全局的VUE过滤器
+    //过滤器是专门操作字符串的，格式化字符串的
+    Vue.filter("foo",function(dateStr){
+        var date = new Date(dateStr);
+        var y = date.getFullYear();
+        var m = date.getMonth()+1;
+        var d = date.getDate();
+        // return  y + "-" +m +"-" + d;
+        //以下为es6的语法糖 模版表达式
+        return `${y}-${m}-${d}`;
+    })
+
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            date:new Date()
+        },
+       methods:{
+       }
+   })
+</script>
+</body>
+</html>

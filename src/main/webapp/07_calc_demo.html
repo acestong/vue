@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<!--
+    v-model实例：计算器
+-->
+
+    <div id="app">
+       <input type="text" v-model="n1"/>
+        <select v-model="op">
+            <option>+</option>
+            <option>-</option>
+            <option>*</option>
+            <option>/</option>
+        </select>
+        <input type="text" v-model="n2"/>
+        <button @click="calc">=</button>
+        <span>{{r}}</span>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            n1:"0",
+            n2:"0",
+            op:"*",
+            r:"0"
+        },
+       methods:{
+        calc(){
+            this.r = eval(+this.n1 + this.op  +this.n2);
+        }
+       }
+   })
+</script>
+</body>
+</html>

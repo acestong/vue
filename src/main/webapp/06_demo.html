@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<!--
+    单项绑定 走马灯例子
+-->
+
+    <div id="app">
+        {{msg}}
+        <br>
+        <button @click="lang1">一倍速</button>
+        <button @click="lang2">二倍速</button>
+        <button @click="lang3">三倍速</button>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            msg:"好好学习，天天向上，别浪～～"
+        },
+       methods:{
+            //在vue实例中的s事件处理函数中，如果想访问data中的数据，获取其他的函数，必须在前面加上"this".
+           //其中，需要主要this陷阱，在methonds中第一层的代表当前vue实例本身，在方法内部代表当前方法
+            lang1(){
+                var self = this;
+                //定时器
+                //以下为es6新语法，
+                //setInterval(function(){})可以写成setInterval(()=>{}),新语法中，没有function，this陷阱也就消失
+                setInterval(function(){
+                    self.msg= self.msg.substring(1)+self.msg.substring(0,1);
+                },400)
+
+            },
+            lang2(){
+                var self = this;
+                setInterval(function(){
+                    self.msg= self.msg.substring(1)+self.msg.substring(0,1);
+                },200)
+
+            },
+            lang3(){
+                var self = this;
+                //定时器
+                //以下为es6新语法，
+                //setInterval(function(){})可以写成setInterval(()=>{})
+                setInterval(function(){
+                    self.msg= self.msg.substring(1)+self.msg.substring(0,1);
+                },100)
+
+            }
+       }
+   })
+</script>
+</body>
+</html>

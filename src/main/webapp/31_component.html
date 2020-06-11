@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+</style>
+</head>
+<body>
+<!--
+	组件是可以有自己的method,组件也不能直接访问实例中的methods
+    -->
+	<div id="app">
+		{{msg}}
+		<my-component></my-component>
+
+		<br/><br/>
+		<login-div></login-div>
+	</div>
+
+
+
+	<template id="foo">
+		<div>
+			道可道非常道----
+			<button @click="f1">Click</button>
+		</div>
+	</template>
+	<script>
+
+
+		var vue = new Vue({
+			el:"#app",
+			data: {
+				msg:"上善若水"
+			},
+			methods: {
+				aa(){
+					console.log("vue实例的aa")
+				}
+			},
+			components: {
+				"myComponent": {
+					template: "#foo",
+					methods:{
+						f1(){
+							console.log("组件的f1")
+						}
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

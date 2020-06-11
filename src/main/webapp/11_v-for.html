@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+-->
+
+    <div id="app" >
+        第一种，写死
+        <ul>
+            <li>{{list[0].id}}---{{list[0].name}}----{{list[0].birthday}}-----{{list[0].money}}</li>
+            <li>{{list[1].id}}---{{list[1].name}}----{{list[1].birthday}}-----{{list[1].money}}</li>
+            <li>{{list[2].id}}---{{list[2].name}}----{{list[2].birthday}}-----{{list[2].money}}</li>
+            <li>{{list[3].id}}---{{list[3].name}}----{{list[3].birthday}}-----{{list[3].money}}</li>
+            <li>{{list[4].id}}---{{list[4].name}}----{{list[4].birthday}}-----{{list[4].money}}</li>
+        </ul>
+
+        第二种，使用v-for循环数组，v-for会将li标签同时进行循环
+        <ul>
+            <li v-for="item in list">
+                {{item.id}}---{{item.name}}----{{item.birthday}}-----{{item.money}}
+            </li>
+        </ul>
+
+        第三种，使用v-for循环数组，带下标
+        <ul>
+            <li v-for="(item,index) in list">
+               {{index+1}}----- {{item.id}}---{{item.name}}----{{item.birthday}}-----{{item.money}}
+            </li>
+        </ul>
+
+        第四种，使用v-for直接循环对象中的属性
+        <ul>
+            <li v-for="(v,k,i) in car">
+                {{k}}---{{v}}---{{i}}
+            </li>
+        </ul>
+
+        第五种，使用v-for直接循环纯数字,循环数字从1开始
+        <ul>
+            <li v-for="i in 5">{{i}}</li>
+        </ul>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            list:[
+                {id:11,name:'关羽',birthday:new Date(101010001010),money:1000},
+                {id:22,name:'张飞',birthday:new Date(373737737382),money:1000.5},
+                {id:33,name:'赵云',birthday:new Date(11919),money:10020},
+                {id:44,name:'马超',birthday:new Date(0),money:19299},
+                {id:55,name:'黄忠',birthday:new Date(),money:100}
+                ],
+            car:{
+                cid:"1001",
+                cname:"car001",
+                brand:"audi",
+                color:"white"
+            }
+        },
+
+       methods:{
+
+       }
+   })
+</script>
+</body>
+</html>

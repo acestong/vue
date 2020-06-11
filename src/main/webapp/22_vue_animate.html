@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+    #d1{
+        background-color: red;
+        width: 80px;
+        height: 30px;
+    }
+    .v-enter,.v-leave-to{
+        opacity: 0;
+        transform: translateX(80px);
+    }
+    .v-enter-to,.v-leave{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    .v-enter-active,.v-leave-active{
+        transition: all 3.6s ease;
+    }
+    .foo-enter,.foo-leave-to{
+        opacity: 0;
+        transform: translateX(80px);
+    }
+    .foo-enter-to,.foo-leave{
+        opacity: 1;
+        transform: translateX(0px);
+    }
+    .foo-enter-active,.foo-leave-active{
+        transition: all .6s ease;
+    }
+</style>
+<!--
+-->
+
+    <div id="app" >
+        <!-- 在vue中，必须将要执行目标元素用transation元素包裹起来 -->
+        <transition>
+            <div v-if="flag" id="d1">邓紫棋</div>
+        </transition>
+        <transition name="foo">
+            <div v-if="flag" >邓紫棋</div>
+        </transition>
+
+
+        <button @click="flag=!flag ">Toggle</button>
+    </div>
+
+<script>
+
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            flag:true
+        }
+   })
+</script>
+</body>
+</html>

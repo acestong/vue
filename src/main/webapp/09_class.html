@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+    .aa{font-size: 30px;}
+    .bb{background-color: #8ab42e;}
+    .cc{border:#000 solid 5px;}
+</style>
+<!--
+-->
+
+<div id="app" >
+    <div :class="['aa','bb','cc']">1.日积月累，是一件很恐怖的事情...</div>
+    <div :class="[s1,s2]">2.日积月累，是一件很恐怖的事情...</div>
+    <div :class="[s]">
+        3.日积月累，是一件很恐怖的事情...<br />
+        <button @click="f1('aa')">aa</button>
+        <button @click="f1('bb')">bb</button>
+        <button @click="f1('cc')">cc</button>
+    </div>
+    <!-- flag为真用aa,flag为假用bb,cc 一直用 -->
+    <div :class="[flag ? 'aa' : 'bb' , 'cc']">
+        4.日积月累，是一件很恐怖的事情...<br />
+        <button @click="f2">toggle</button>
+    </div>
+    <!-- flag为真时用aa，否则什么效果都没有 -->
+    <div :class="[{'aa':flag}, 'cc']">
+        5.日积月累，是一件很恐怖的事情...<br />
+        <button @click="f2">toggle</button>
+    </div>
+    <div :class="{'aa':flag,'bb':flag,'cc':flag}">
+        6.日积月累，是一件很恐怖的事情...<br />
+        <button @click="f2">toggle</button>
+    </div>
+
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            s1:"aa",
+            s2:"bb",
+            s3:"cc",
+            s:"aa",
+            flag:true
+        },
+       methods:{
+            f1(arg){
+                this.s = arg;
+            },
+           f2(){
+                this.flag = !this.flag;
+           }
+
+       }
+   })
+</script>
+</body>
+</html>

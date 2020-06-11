@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+    页面初始进入的时候，焦点直接到输入框中
+-->
+
+    <div id="app" >
+        <input type="text"  v-foo /><br />
+
+        <!-- v-color的参数red需要用''引起来，否则vue会在变量中找，即当成red本身 -->
+        <div v-color="'pink'">我是测试航</div>
+    </div>
+
+<script>
+
+    //局部指令只能用于当前vue实例中
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+        },
+       methods:{
+       },
+       directives:{
+            "foo": {
+                //样式操作
+                bind:function(el) {
+                    el.style.border = "gray double 5px";
+                },
+                inserted:function(el){
+                    el.focus();
+                }
+            },
+           //第二个参数：可以接受参数，参数建议使用binding这个名字,也可以自定义指令名字
+           "color":{
+                bind:function(el,binding){
+                    el.style.color = binding.value;
+                },
+               inserted:function(el,binding){
+                    alert(binding.value);
+               }
+           }
+       }
+   })
+</script>
+</body>
+</html>

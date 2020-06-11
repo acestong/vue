@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<!--
+    1.搭建vue环境 ,引入vue前端框架
+    2.一旦引入了vue框架，在dom中就多了一个Vue对象
+    3.一个vue只能绑定一个实例
+-->
+
+<div id="app">
+    <p>飞雪连天射白鹿</p>
+    <p>--{{msg}}--</p>    <!-- {{}}为差值表达式 -->
+    <p>--{{msg2}}--</p>
+
+</div>
+
+<script>
+   var vue = new Vue({
+       // 全称：element 表示DOM的某个元素
+        el:"#app",
+        data:{
+            msg:"笑书神侠倚碧鸳",
+            msg2:"飞雪连天射白鹿"
+        }
+   })
+</script>
+</body>
+</html>

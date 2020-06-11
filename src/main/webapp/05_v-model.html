@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<!--
+    v-model：双向绑定
+-->
+
+    <div id="app">
+       <input type="text" v-model="msg"/>
+        <p>{{msg}}</p>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            msg:"红红火火"
+        },
+       methods:{
+            f1(){
+                // this.msg = this.msg.substring(1)
+                // alert(this.msg.substring(1))
+            }
+       }
+   })
+</script>
+</body>
+</html>

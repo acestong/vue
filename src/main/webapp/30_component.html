@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+</style>
+</head>
+<body>
+<!--
+        组件中的data,
+        像vue实例中有自己的data一样，Vue组件也可以有自己的data，
+        但是，vuez组件中的data属性必须是一个function，否则会报错，【vue warning】 the data should be a function
+        该function还必须要返回一个对象
+        虽然实例中的data和组件中的data，目前是不能通用的
+    -->
+	<div id="app">
+		{{msg}}
+		<my-component></my-component>
+
+		<br/><br/>
+		<login-div></login-div>
+	</div>
+
+
+
+	<template id="foo">
+		<div>道可道非常道----{{msg}}</div>
+	</template>
+	<template id="bar">
+		<div>登陆界面--{{msg}}</div>
+	</template>
+	<script>
+
+
+		var vue = new Vue({
+			el:"#app",
+			data: {
+				msg:"上善若水"
+			},
+			methods: {
+			},
+			components:{
+				"myComponent":{
+					template:"#foo",
+					data(){
+						return {
+							msg:"啊啊宝贝"
+						};
+					}
+				},
+				"loginDiv":{
+					 template: "#bar",
+					data(){
+					 	return {
+					 		msg:"pppppp"
+						};
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+        解决在列表前添加数据时，前面的选择框选择的准确问题
+        在v-for后面使用 :key="item.id"
+-->
+
+    <div id="app" >
+        id:<input type="text" size="10" v-model="id"/>
+        name:<input type="text" size="10" v-model="name"/>
+        <button @click="add">add </button>
+        <br /><br />
+        <div v-for="item in list" v-bind:key="item.id">
+            <input  type="checkbox"/>{{item.id}}--{{item.name}}
+        </div>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+            id:'',
+            name:'',
+            list:[
+                {id:11,name:'关羽',birthday:new Date(101010001010),money:1000},
+                {id:22,name:'张飞',birthday:new Date(373737737382),money:1000.5},
+                {id:33,name:'赵云',birthday:new Date(11919),money:10020},
+                {id:44,name:'马超',birthday:new Date(0),money:19299},
+                {id:55,name:'黄忠',birthday:new Date(),money:100}
+                ]
+        },
+
+       methods:{
+            add(){
+                // this.list.push({
+                //     'id':this.id,'name':this.name,birthday:new Date(),money:1000101010
+                // });
+
+                this.list.unshift({
+                    'id':this.id,'name':this.name,birthday:new Date(),money:1000101010
+                     });
+                this.id = '';
+                this.name = '';
+            }
+       }
+   })
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+    [v-cloak]{
+        display:none;
+    }
+</style>
+<body>
+<!--
+    1.
+-->
+
+<div id="app">
+    <!-- 有闪烁问题时使用 -->
+    <h3>1.{{msg}}</h3>
+    <!-- 没有闪烁问题时，同时还必须搭配style 中v-cloak使用，可用于拼接 -->
+    <h3 v-cloak>2.{{msg}}</h3>
+    <!-- v-text中不用{{}},而是直接取出data中msg的值，直接覆盖标签中的内容,不解析html -->
+    <h3 v-text="msg"></h3>
+    <!-- v-html能够解析html -->
+    <h3 v-html="msg2"></h3>
+    <h3 v-text="msg2"></h3>
+</div>
+
+<!-- 为了演示闪烁问题才在此处引入vue -->
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<script>
+    alert('pause');
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            msg:"东方不败",
+            msg2:"<marquee>天外飞仙</marquee>"
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vue文件上传</title>
+</head>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-resource/1.5.1/vue-resource.js"></script>
+<body>
+
+<div id="app">
+<!--    原生js操作获取input-->
+    photo<input type="file" id="photo" multiple>
+<!--    使用vue ref属性获取input-->
+    photo<input type="file" ref="photo" multiple>
+    <button type="button" @click="upload">上传</button>
+</div>
+</body>
+<script>
+    var vue = new Vue({
+        el:"#app",
+        data:{
+            msg:"1111"
+        },
+        methods:{
+            upload(){
+                //毕竟，下面发的是ajax请求，ajax请求，如何将文件的二进制发送给服务器
+                //可以借助formData对象，formData就是用来模拟表单数据的
+                //只要使用了formData对象，就可以像表单一样提交二进制数据
+                var formData = new window.FormData();
+                //模拟输入框，<input type="text" name="name" value="andy...">
+                // formData.append("name","andy...")
+                //模拟输入框，<input type="file" name="photo">
+                //使用js操作获取input标签
+                // var photoInput = document.getElementById("photo");
+                var photoInput = this.$refs.photo;
+                formData.append("photo",photoInput.files[0])
+
+
+                this.$http.post("http://localhost:8095/user/upload",formData);
+            }
+        }
+    })
+</script>
+</html>

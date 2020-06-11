@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+-->
+
+    <div id="app" >
+        {{date|foo}}
+    </div>
+
+<script>
+
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            date:new Date()
+        },
+       //局部过滤器只能在当前vue实例中使用
+       filters:{
+           "foo":function(dateStr){
+               return dateStr+"~~~~~`";
+           }
+       },
+       methods:{
+       }
+   })
+</script>
+</body>
+</html>

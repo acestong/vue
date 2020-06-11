@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+       v-if:进行的是DOM操作，能把元素从DOM中删除或者添加进节点
+       v-show:仅用样式隐藏起来，display:none，并不会进行DOM的操作
+
+       如果一个元素经常切换的时候，此时需要使用v-show，可以减少操作的代价
+-->
+
+    <div id="app" >
+       <div v-if="flag">被v-if控制的元素</div>
+       <div v-show="flag">被v-show控制的元素</div>
+        <button @click="f1">toggle</button>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            a:"aaa",
+            flag:true
+        },
+       methods:{
+            f1(){
+                this.flag = !this.flag;
+            }
+       }
+   })
+</script>
+</body>
+</html>

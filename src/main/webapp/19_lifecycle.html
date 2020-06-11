@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+    每一个vue实例，都有自己的生命周期，所谓生命周期，就是在特定的时间做特定的事情
+    Vue实例的生命周期函数有多个，可以分为三类，分为
+    创建时期 beforeCreate created
+    挂载时期 beforeMount mounted beforeUpdate updated
+    销毁时期 beforeDestroy destroyed
+-->
+
+    <div id="app" >
+        {{msg}}
+        <button @click="changeMsg">change</button>
+        <button @click="destroyBtn">destroy</button>
+    </div>
+
+<script>
+
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+            msg:"冰雨"
+        },
+       methods:{
+            f1(){
+                console.log("f1...");
+            },
+           changeMsg(){
+                this.msg = Math.random();
+           },
+           destroyBtn(){
+                this.$destroy();
+           }
+       },
+       //生命周期函数beforeCreate 此时vue的属性和方法还没有初始化好呢 是无法使用的
+       beforeCreate(){
+            // console.log("beforeCreate..."+this.msg);
+            // this.f1();
+           console.log("beforeCreate...");
+       },
+       //生命周期函数create，此时vue的属性和方法已经初始化好了，已经可以使用了,但是此时vue中的{{msg}}还未被编译
+       created(){
+            console.log("created..."+this.msg);
+            this.f1();
+            console.log(document.getElementById("app").innerText);
+       },
+       //生命周期函数beforeMount，仅替换掉了内存的虚拟DOM上的{{}},但是页面上真正的DOM还未被修改
+       beforeMount(){
+           console.log("beforeMount..."+this.msg);
+           this.f1();
+           console.log(document.getElementById("app").innerText);
+       },
+       //mounted，仅替换掉了内存的虚拟DOM上的{{}},且替换了页面上真正的DOM
+       mounted(){
+           console.log("mounted..."+this.msg);
+           this.f1();
+           console.log(document.getElementById("app").innerText);
+       },
+       //beforeUpdate，修改虚拟DOM，此时还未修改真实DOM
+       beforeUpdate(){
+           console.log("beforeUpdate..."+this.msg);
+           console.log(document.getElementById("app").innerText);
+       },
+       //beforeUpdate，修改虚拟DOM，同时修改真实DOM
+       updated(){
+           console.log("updated..."+this.msg);
+           console.log(document.getElementById("app").innerText);
+       },
+       beforeDestroy(){
+           console.log("beforeDestroy..."+this.msg);
+       },
+       destroyed(){
+           console.log("destroyed..."+this.msg);
+       }
+   })
+</script>
+</body>
+</html>

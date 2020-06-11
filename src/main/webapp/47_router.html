@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js"></script>
+	<style>
+		a{
+			text-decoration: none;
+		}
+		.foo{
+			background-color: #00b9f1;
+			color: #ffffff;
+		}
+		.v-enter,.v-leave-to{
+			opacity: 0;
+			transform: translateX(150px);
+		}
+		.v-enter-to,.v-leave{
+			opacity: 1;
+			transform: translateX(0px);
+		}
+		.v-enter-active,.v-leave-active{
+			transition: all .6s ease;
+		}
+	</style>
+</head>
+<body>
+	<!--
+	我们可以在路由监听的路径上添加参数，这并不影响以前的功能
+	 -->
+	<div id="app">
+		<transition mode="out-in">
+			<router-view></router-view>
+		</transition>
+
+		<router-link to="/login?id=10&name='andy'" >router-link登陆</router-link>
+		<router-link to="/register">router-link注册</router-link>
+		<router-link to="/center">router-link个人中心</router-link>
+	</div>
+
+
+
+	<script>
+		/*
+            2. 问题是，既然给组件传递参数了，那么组件要如何才能获取到这个参数呢？
+            a.与Vue实例一样，Vue组件也有生命周期函数，
+            b.且在created()这个生命周期函数执行时，Vue组件的所有属性都已齐全，
+            c.可以通过$route属性访问到路由相关的信息，如下：
+            */
+		var login = {
+			template: "<h3>登录组件</h3>",
+			created(){
+				console.log(this.$route.query.name+"login create..."+this.$route.query.id)
+			}
+		};
+		var register = {
+			template: "<h3>注册组件</h3>"
+		};
+		var center = {
+			template: "<h3>个人中心</h3>"
+		};
+
+		var routerObj = new VueRouter({
+			routes:[
+					{path:"/login",component:login},
+					{path:"/register",component:register},
+					{path:"/center",component:center},
+					{path:"/",component:center},
+					],
+			linkActiveClass:'foo'
+		});
+		var app = new Vue({
+			el:"#app",
+			data:{
+				msg:"aaaaaa"
+			},
+			methods: {
+			},
+			router:routerObj
+		});
+	</script>
+</body>
+</html>

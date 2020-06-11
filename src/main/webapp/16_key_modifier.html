@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+-->
+
+    <div id="app" >
+        <!-- 13代表enter健的数字-->
+        <input  type="text" @keyup.13="show" value="13"/><br /><br />
+        <!--
+            vue为常用快捷键提供了别名
+               .enter .tab .delete .esc .space .up .down .left .right
+         -->
+        <input  type="text" @keyup.enter="show" value="enter"/><br /><br />
+        <!--
+            自定义快捷键，只有点击f3的时候，才能触发事件
+         -->
+        <input  type="text" @keyup.dot="show()" value="自定义快捷"/><br /><br />
+    </div>
+
+<script>
+    // 测试获取某个键盘的keyCode
+    // document.onkeyup = function(){
+    //     alert(event.keyCode);
+    // }
+
+
+    //自定义快捷键
+    Vue.config.keyCodes.dot = 190;
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+        },
+       methods:{
+            show(){
+                console.log("离离原上草"+new Date().getTime())
+            }
+       }
+   })
+</script>
+</body>
+</html>

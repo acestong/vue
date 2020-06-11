@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<!--
+    v-on:可以简写为@ 后面接相关事件
+-->
+
+    <div id="app">
+        <button v-on:click="find">Find</button>
+        <button v-on:click="f1">f1</button>
+        <button @click="f2">f2</button>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+        },
+       methods:{
+            find(){
+                alert("find")
+            },
+           <!-- 在es6新语法json格式中，f1:function()可以简写为f1()-->
+           f1:function(){
+               alert("f1")
+           },
+           f2(){
+                alert("f2")
+           }
+       }
+   })
+</script>
+</body>
+</html>

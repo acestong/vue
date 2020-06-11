@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<body>
+<style>
+</style>
+<!--
+    页面初始进入的时候，焦点直接到输入框中
+-->
+
+    <div id="app" >
+        <input type="text"  v-focus /><br />
+        <input id="i1" type="text" value="使用原生方法获取焦点"/>
+    </div>
+
+<script>
+
+    //js原生方法
+    // var i1 = document.getElementById("i1");
+    // i1.focus();
+
+
+    //定义一个全局指令，在定义指令的时候，指令名字前面不用加"v-"
+    Vue.directive("focus",{
+        //bind属性后面的函数，是元素渲染页面之前执行
+        //第一个参数就是指令所在的参数，注意，此参数是js原生对象，那就意味着，这里可以进行js原生代码的操作
+        //该函数不适合做js操作，会被vue重新渲染覆盖的，而是适合做css操作
+        bind:function(el){
+           el.style.backgroundColor="pink"
+        },
+        //当元素插入到Dom之后，就会执行inserted之后的方法，此函数适合做js操作
+        inserted:function(el){
+            el.focus();
+        }
+    })
+
+   var vue = new Vue({
+        el:"#app",
+        data: {
+        },
+       methods:{
+       }
+   })
+</script>
+</body>
+</html>

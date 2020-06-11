@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.10/vue.js"></script>
+<style>
+    #d1,#d2,#d3{
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+        border: #003333 solid 1px;
+        margin-top: 5px;
+    }
+</style>
+<body>
+<!--
+    五个事件修饰符
+    事件默认是先从内向外触发，在由外向内触发地冒泡触发事件；
+    @click.stop代表事件由内向外传入，仅进行触发当前事件；
+    @click.once代表当前事件仅触发一次，触发一次之后就不在触发，但会继续传递事件到外层
+    @click.capture用于父容器触发事件时，事件将有外向内的触发
+    @click.self表示只有事件用在自己身上时才触发
+    @click.prevent表示阻止默认事件
+-->
+
+    <div id="app">
+        <div id="d1" @click="f1">
+            <button @click="f2">会事件冒泡</button><br />
+            <button @click.stop="f2">不会事件冒泡</button><br />
+            <button @click.once="f2">一次性事件</button><br />
+        </div>
+        <div id="d2" @click.capture="f1">
+            <button @click="f2">主要测试div父容器的capture</button><br />
+        </div>
+        <div id="d3" @click.self="f1">
+            <button @click="f2">主要测试div父容器的self</button><br />
+            <a href="http://www.baidu.com" @click.prevent="f1">百度</a>
+        </div>
+    </div>
+
+<script>
+   var vue = new Vue({
+        el:"#app",
+        data:{
+        },
+       methods:{
+            f1(){
+                console.log("div单击事件")
+            },
+           f2(){
+                console.log("按钮单击事件")
+           }
+       }
+   })
+</script>
+</body>
+</html>

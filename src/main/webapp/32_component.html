@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+	.v-enter,v-leave-to{
+		opacity:0;
+		transform: translateX(150px);
+	}
+	.v-enter-to,v-leave{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+	.v-enter-active,v-leave-active{
+	transition:all .6s ease;
+	}
+</style>
+</head>
+<body>
+<!--
+    -->
+	<div id="app">
+		<transition mode="out-in">
+		<login-div v-if="flag"></login-div>
+		<register-div v-else="flag"></register-div>
+		</transition>
+		<br><br>
+
+		<button @click="flag=true">登陆按钮</button>
+		<button @click="flag=false">注册按钮</button>
+	</div>
+
+
+
+	<template id="loginUI">
+		<div>登陆页面</div>
+	</template>
+
+	<template id="registerUI">
+		<div>注册页面</div>
+	</template>
+	<script>
+
+
+		var vue = new Vue({
+			el:"#app",
+			data: {
+				msg:"上善若水",
+				flag:true
+			},
+			methods: {
+			},
+			components: {
+				"loginDiv":{
+					template:"#loginUI"
+				},
+				"registerDiv":{
+					template:"#registerUI"
+				}
+			}
+		});
+	</script>
+</body>
+</html>

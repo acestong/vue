@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/vue-router/3.2.0/vue-router.min.js"></script>
+	<style>
+	</style>
+</head>
+<body>
+	<!--
+		使用child属性嵌套路由
+	 -->
+	<div id="app">
+		<router-link to="user_manage">用户管理</router-link>
+		<router-link to="book_manage">图书管理</router-link>
+		<router-view></router-view>
+	</div>
+
+
+	<template id = "user_manage">
+		<div>
+			用户管理<br>
+			<router-link to="/user_manage/user_save">增加用户</router-link>
+			<router-link to="/user_manage/user_delete">删除用户</router-link>
+			<router-view></router-view>
+		</div>
+	</template>
+	<template id = "book_manage">
+		<div>
+			图书管理
+		</div>
+	</template>
+	<template id="user_save">
+		<div>新增用户</div>
+	</template>
+	<template id="user_delete">
+		<div>删除用户</div>
+	</template>
+
+	<script>
+		var user_manage= {
+			template:"#user_manage"
+		}
+		var user_save= {
+			template:"#user_save"
+		}
+		var user_delete= {
+			template:"#user_delete"
+		}
+		var book_manage= {
+			template:"#book_manage"
+		}
+
+		var router = new VueRouter({
+			routes:[
+				{
+					path:"/user_manage",
+					component:user_manage,
+					children:[
+						{path:"user_save",component:user_save},
+						{path:"user_delete",component:user_delete}
+					]
+				},
+				{path:"/book_manage",component:book_manage},
+				{path:"/",component:book_manage}
+					]
+		});
+
+
+		var app = new Vue({
+			el:"#app",
+			data:{
+				msg:"aaaaaa"
+			},
+			methods: {
+			},
+			router
+		});
+	</script>
+</body>
+</html>

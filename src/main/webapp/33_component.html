@@ -1,0 +1,75 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<style>
+	.v-enter,v-leave-to{
+		opacity:0;
+		transform: translateX(150px);
+	}
+	.v-enter-to,v-leave{
+		opacity: 1;
+		transform: translateX(0px);
+	}
+	.v-enter-active,v-leave-active{
+	transition:all .6s ease;
+	}
+</style>
+</head>
+<body>
+<!--
+    -->
+	<div id="app">
+		<transition mode="out-in">
+			<component :is="cname"></component>
+		</transition>
+
+		<button @click="cname='loginDiv'">登陆按钮</button>
+		<button @click="cname='registerDiv'">注册按钮</button>
+		<button @click="cname='foo'">foo</button>
+		<br><br>
+	</div>
+
+
+
+	<template id="loginUI">
+		<div>登陆页面</div>
+	</template>
+
+	<template id="registerUI">
+		<div>注册页面</div>
+	</template>
+
+
+	<template id="foo">
+		<div>foo</div>
+	</template>
+	<script>
+
+
+		var vue = new Vue({
+			el:"#app",
+			data: {
+				msg:"上善若水",
+				flag:true,
+				cname:"loginDiv"
+			},
+			methods: {
+			},
+			components: {
+				"loginDiv":{
+					template:"#loginUI"
+				},
+				"registerDiv":{
+					template:"#registerUI"
+				},
+				"foo":{
+					template:"#foo"
+				}
+			}
+		});
+	</script>
+</body>
+</html>
